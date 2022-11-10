@@ -107,3 +107,58 @@ body {
     text-decoration: underline;
     width: 13em;
 }
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 25em;
+    height: 40em;
+    border: 1px solid black;
+    margin: auto;
+    margin-top: 5em;
+    background-color: #7fcdb8;
+    border-radius: 5px;
+}
+.register-buttons {
+    display: flex;
+    justify-content: center;
+    margin: 1em
+}
+.register-form-body {
+    /*background-color: #90b0ba;*/
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    margin: 0.5em 3em;
+    /*border: 1px solid red;*/
+}
+.register-form-body > label {
+    margin: 20px 10px 0px 10px;
+    padding: 5px;
+    text-decoration: underline;
+}
+.register-form-body > input {
+    margin: 5px 10px 10px 10px;
+    padding: 1em;
+}
+
+#register-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20%;
+    text-align: center;
+    /*border: 1px solid green;*/
+    margin: 0;
+}
+
+#register-form-register-button {
+    display: inline-block;
+    height: 100px;
+    margin: 20px 10px 10px 10px;
+    border-radius: 5em;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    color: white;
+    animation: gradient 15s ease infinite;
+}
