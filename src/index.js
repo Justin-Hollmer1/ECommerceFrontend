@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './style.css';
-import App from './Components/App';
+import App from './Pages/App';
 import reportWebVitals from './reportWebVitals';
-import NavBar from "./Components/NavBar";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
