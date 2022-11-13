@@ -11,13 +11,11 @@ function NavBar() {
 
     return (
         <div className="navbar">
-            <h1>This is the navbar</h1>
-
-
+            <h1>Title</h1>
             {/*Nav Right*/}
             <div className="nav-right">
                 <a href="/login"><span>Login / Register<FontAwesomeIcon icon={faUser} /></span></a>
-                <span>Cart <FontAwesomeIcon icon={faCartShopping} /></span>
+                <a href="/viewcart"><span>Cart <FontAwesomeIcon icon={faCartShopping} /></span></a>
             </div>
 
         </div>

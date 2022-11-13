@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import LoginForm from "./LoginForm";
 import MainPage from "./MainPage";
 import RegisterForm from "./Register";
+import ViewCart from "./ViewCart";
 function App() {
 
     return (
@@ -11,6 +12,7 @@ function App() {
                 <Route path="/" element={<MainPage />} />
                 <Route path="/login" element={<LoginForm />} />
                 <Route path="/register" element={<RegisterForm />} />
+                <Route path="/viewcart" element={<ViewCart />} />
             </Routes>
         </Router>
     );
