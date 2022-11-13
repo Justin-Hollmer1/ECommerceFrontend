@@ -4,13 +4,14 @@ import { useState, useEffect } from "react";
 
 function RegisterForm() {
 
-
+    // Declaring state for all the data and errors in the form.
     let [formData, setFormData] = useState({
         username: "",
         email: "",
         password: "",
         confirm_password: ""
-    })
+    });
+    let [formErrors, setFormErrors] = useState({});
 
     function updateForm(event) {
         event.preventDefault();
@@ -22,15 +23,55 @@ function RegisterForm() {
         })
     }
 
+    // On page load, this fetch request gets all data from the user's table in the database and stores it in local memory.
     let allUsersData;
+    let arrayOfUsernames;
+    let arrayOfEmails;
+    let onPageLoad = async () => {
+        await fetch("http://ec2-18-224-4-73.us-east-2.compute.amazonaws.com:8080/users")
+            .then(resp => resp.json())
+            .then(data => allUsersData = data);
+        arrayOfUsernames = allUsersData.map(n => {
+            return n.username;
+        })
+        arrayOfEmails = allUsersData.map(n => {
+            return n.email;
+        })
+    }
+    onPageLoad();
 
-    let clickToRegister = async () => {
+    function validate(values) {
+        let errors = {};
+        if (!values.username) {
+            errors.username = "Username field must be filled out.";
+        } else if (!values.email) {
+            errors.email = "Email field must be filled out.";
+        } else if (values.password.length < 4) {
+            errors.password = "Password must be at least 4 characters in length.";
+        } else if (values.password !== values.confirm_password) {
+            errors.confirm_password = "Passwords do not match.";
+        }
+        console.log(errors.email);
+        return errors;
+    }
+
+
+    // This function is run whenever the form is submitted.
+    let clickToRegister = (e) => {
+
+        // This is where the error handling for the form is done.
+        setFormErrors(validate(formData));
+
+        e.preventDefault();
+        // Storing all the data from when the form is submitted in this object.
         let userObject = {
             "username": formData.username,
             "email": formData.email,
             "password": formData.password,
             "admin_status": 0
         }
+
+        // Declaring this function to post data to the database, not calling it yet.
         function postUser() {
             fetch("http://ec2-18-224-4-73.us-east-2.compute.amazonaws.com:8080/save-user", {
                 method: 'POST',
@@ -41,37 +82,20 @@ function RegisterForm() {
             }).then(resp => console.log(resp));
         }
 
-
-        await fetch("http://ec2-18-224-4-73.us-east-2.compute.amazonaws.com:8080/users")
-            .then(resp => resp.json())
-            .then(data => allUsersData = data);
-        let arrayOfUsernames = allUsersData.map(n => {
-            return n.username;
-        })
-        let arrayOfEmails = allUsersData.map(n => {
-            return n.email;
-        })
-
-
-        // Handling cases where users try to submit with passwords not matching, alerady in the database emails, or alerady in the database passwords.
-        if (document.getElementById("password").value !== document.getElementById("confirm_password").value) {
-            console.log("The passwords do not match.")
-        } else if (arrayOfUsernames.includes(userObject.username)) {
-            console.log("That username alerady exists in the database.")
-        } else if (arrayOfEmails.includes(userObject.email)) {
-            console.log("That email alerady exists in the database.")
-        }
-        else {
+        // Once some error handling is done it will post the user to the database and redirect to the login page.
+        console.log(formErrors.length)
+        if (formErrors.length === undefined) {
             postUser();
             navigate("/login");
         }
+
     }
 
 
     let navigate = useNavigate();
     return (
         <div className="register-form">
-            <div className="register-form-body">
+            <form className="register-form-body" onSubmit={clickToRegister}>
                 <h1 id="register-header">Register</h1>
                 <label htmlFor="email">Email: </label>
                 <input
@@ -82,6 +106,7 @@ function RegisterForm() {
                     value={formData.email}
                     type="email"
                 />
+                {formErrors.email !== undefined && <p className="form-error">{formErrors.email}</p>}
                 <label htmlFor="username">Username: </label>
                 <input
                     id="username"
@@ -91,6 +116,7 @@ function RegisterForm() {
                     value={formData.username}
                     type="text"
                 />
+                {formErrors.username !== undefined && <p className="form-error">{formErrors.username}</p>}
                 <label htmlFor="password">Password: </label>
                 <input
                     id="password"
@@ -100,6 +126,7 @@ function RegisterForm() {
                     value={formData.password}
                     type="password"
                 />
+                {formErrors.password !== undefined && <p className="form-error">{formErrors.password}</p>}
                 <label htmlFor="confirm_password">Confirm Password: </label>
                 <input
                     id="confirm_password"
@@ -109,8 +136,9 @@ function RegisterForm() {
                     value={formData.confirm_password}
                     type="password"
                 />
-                <button id="register-form-register-button" onClick={clickToRegister}>Register</button>
-            </div>
+                {formErrors.confirm_password !== undefined && <p className="form-error">{formErrors.confirm_password}</p>}
+                <button id="register-form-register-button">Register</button>
+            </form>
         </div>
     )
 }

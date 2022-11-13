@@ -116,7 +116,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     width: 25em;
-    height: 40em;
+    height: 43em;
     border: 1px solid black;
     margin: auto;
     margin-top: 5em;
@@ -164,6 +164,12 @@ body {
     background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
     color: white;
     animation: gradient 15s ease infinite;
+}
+
+.form-error {
+    color: red;
+    margin-left: 10px;
+    margin-top: 0;
 }
 
 .card {
