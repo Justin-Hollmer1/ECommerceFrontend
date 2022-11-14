@@ -12,6 +12,7 @@ function RegisterForm() {
         confirm_password: ""
     });
     let [formErrors, setFormErrors] = useState({});
+    let [hitSubmit, setHitSubmit] = useState(false);
 
     function updateForm(event) {
         event.preventDefault();
@@ -40,57 +41,74 @@ function RegisterForm() {
     }
     onPageLoad();
 
+    // Here are listed all the error conditions.
     function validate(values) {
         let errors = {};
+        // Username field can't be blank.
         if (!values.username) {
             errors.username = "Username field must be filled out.";
-        } else if (!values.email) {
+        }
+        // Checks if that username already exists in the database.
+        else if (arrayOfUsernames.includes(values.username)) {
+            errors.username = "That username already exists in the database."
+        }
+        // Email field can't be blank.
+        else if (!values.email) {
             errors.email = "Email field must be filled out.";
-        } else if (values.password.length < 4) {
+        }
+        // Checks if that email already exists in the database.
+        else if (arrayOfEmails.includes(values.email)) {
+            errors.email = "That email address already exists in the database."
+        }
+        // Password has to be more than 4 characters long
+        else if (values.password.length < 4) {
             errors.password = "Password must be at least 4 characters in length.";
-        } else if (values.password !== values.confirm_password) {
+        }
+        // Confirm password field has to match password field.
+        else if (values.password !== values.confirm_password) {
             errors.confirm_password = "Passwords do not match.";
         }
-        console.log(errors.email);
         return errors;
     }
 
+    useEffect(() => {
+        if (!Object.keys(formErrors).length && hitSubmit) {
+            console.log("Submit now")
+            // Storing all the data from when the form is submitted in this object.
+            let userObject = {
+                "username": formData.username,
+                "email": formData.email,
+                "password": formData.password,
+                "admin_status": 0
+            }
 
-    // This function is run whenever the form is submitted.
-    let clickToRegister = (e) => {
+            // Declaring this function to post data to the database, not calling it yet.
+            function postUser() {
+                fetch("http://ec2-18-224-4-73.us-east-2.compute.amazonaws.com:8080/save-user", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(userObject)
+                }).then(resp => console.log(resp));
+            }
 
-        // This is where the error handling for the form is done.
-        setFormErrors(validate(formData));
-
-        e.preventDefault();
-        // Storing all the data from when the form is submitted in this object.
-        let userObject = {
-            "username": formData.username,
-            "email": formData.email,
-            "password": formData.password,
-            "admin_status": 0
-        }
-
-        // Declaring this function to post data to the database, not calling it yet.
-        function postUser() {
-            fetch("http://ec2-18-224-4-73.us-east-2.compute.amazonaws.com:8080/save-user", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(userObject)
-            }).then(resp => console.log(resp));
-        }
-
-        // Once some error handling is done it will post the user to the database and redirect to the login page.
-        console.log(formErrors.length)
-        if (formErrors.length === undefined) {
+            // Once some error handling is done it will post the user to the database and redirect to the login page.
             postUser();
             navigate("/login");
         }
+        else {
+            console.log("There are errors.")
+        }
+    }, [formErrors])
 
+    // This function is run whenever the form is submitted.
+    let clickToRegister = (e) => {
+        e.preventDefault();
+        // This is where the error handling for the form is done.
+        setFormErrors(validate(formData));
+        setHitSubmit(true);
     }
-
 
     let navigate = useNavigate();
     return (
