@@ -90,7 +90,10 @@ function RegisterForm() {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(userObject)
-                }).then(resp => console.log(resp));
+                }).then(resp => resp.json()).then(data => {
+                    sessionStorage.setItem("username", data.username)
+                    sessionStorage.setItem("userID", data.id)
+                });
             }
 
             // Once some error handling is done it will post the user to the database and redirect to the login page.
