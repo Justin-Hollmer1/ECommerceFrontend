@@ -19,7 +19,7 @@ function NavBar() {
                 {sessionStorage.getItem("username") && <button onClick={() => {
                     sessionStorage.removeItem("username")
                     window.location.reload();
-                }}>Logout</button>}
+                }}><span>Logout</span></button>}
             </div>
 
         </div>
