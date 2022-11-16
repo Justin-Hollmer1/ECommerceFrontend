@@ -14,8 +14,12 @@ function NavBar() {
             <h1>Title</h1>
             {/*Nav Right*/}
             <div className="nav-right">
-                <a href="/login"><span>Login / Register<FontAwesomeIcon icon={faUser} /></span></a>
-                <a href="/viewcart"><span>Cart <FontAwesomeIcon icon={faCartShopping} /></span></a>
+                {!sessionStorage.getItem("username") && <a href="/login"><span>Login / Register<FontAwesomeIcon icon={faUser}/></span></a>}
+                {sessionStorage.getItem("username") && <a href="/viewcart"><span>Cart <FontAwesomeIcon icon={faCartShopping}/></span></a>}
+                {sessionStorage.getItem("username") && <button onClick={() => {
+                    sessionStorage.removeItem("username")
+                    window.location.reload();
+                }}>Logout</button>}
             </div>
 
         </div>
