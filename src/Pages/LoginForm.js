@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import {useState, useEffect} from "react";
+import { FetchURL } from "../FetchLocation";
 
 function LoginForm() {
     let navigate = useNavigate();
@@ -42,7 +43,7 @@ function LoginForm() {
     // This will run once on page load.
     useEffect( () => {
         const doTheThing = async () => {
-            await fetch("http://ec2-18-224-4-73.us-east-2.compute.amazonaws.com:8080/users")
+            await fetch( FetchURL + "/users")
                 .then(resp => resp.json())
                 .then(data => setAllUsersData(data));
             // let arrayOfUsernames = allUsersData.map(n => {

@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { FetchURL }from "../FetchLocation"
 
 function RegisterForm() {
 
@@ -29,7 +30,7 @@ function RegisterForm() {
     let arrayOfUsernames;
     let arrayOfEmails;
     let onPageLoad = async () => {
-        await fetch("http://ec2-18-224-4-73.us-east-2.compute.amazonaws.com:8080/users")
+        await fetch(FetchURL + "/users")
             .then(resp => resp.json())
             .then(data => allUsersData = data);
         arrayOfUsernames = allUsersData.map(n => {
@@ -84,7 +85,7 @@ function RegisterForm() {
 
             // Declaring this function to post data to the database, not calling it yet.
             function postUser() {
-                fetch("http://ec2-18-224-4-73.us-east-2.compute.amazonaws.com:8080/save-user", {
+                fetch(FetchURL + "/save-user", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
