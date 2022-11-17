@@ -188,6 +188,7 @@ body {
     margin-top: 12px;
     padding: 0;
     border-radius: 10px;
+    max-height: 80%;
 }
 .card-text {
     display: flex;
@@ -195,13 +196,21 @@ body {
     width: 90%;
     height: 50%;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: flex-end;
     margin: 15px
 }
 .card-button {
     margin-bottom: 15px;
     width: 100px;
-    height: 70px;
+    /*height: 40px;*/
+}
+.card-quantity {
+    /*height: 34px;*/
+    width: 30px;
+    margin-left: 5px;
+}
+.card-button-holder {
+    height: 40px;
 }
 .view-cart {
     display: flex;
