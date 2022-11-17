@@ -1,0 +1,1 @@
+export const FetchURL = "http://ec2-18-218-90-182.us-east-2.compute.amazonaws.com:8080";
