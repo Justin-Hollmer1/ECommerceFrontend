@@ -73,16 +73,6 @@ function Card({name, cost, imagePath}) {
                 {sessionStorage.getItem("cart-item-" + name) && <div className="remove-from-cart-buttons">
                     <button className="remove-button" type="submit" onClick={removeFromCart}>Remove From Cart</button>
                     <p>{itemQuantity} "{name}" in cart now</p>
-                    {/*<input*/}
-                    {/*    className="card-quantity"*/}
-                    {/*    type="number"*/}
-                    {/*    id="quantity"*/}
-                    {/*    name="quantity"*/}
-                    {/*    min="1"*/}
-                    {/*    max="99"*/}
-                    {/*    value={itemQuantity}*/}
-                    {/*    onChange={handleQuantityChange}*/}
-                    {/*/>*/}
                 </div>}
 
             </div>

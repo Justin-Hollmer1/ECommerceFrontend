@@ -18,9 +18,13 @@ import { useNavigate } from "react-router-dom";
 
 const images = {Bananas, Apples, Chicken_breast, Avocados, Carrots, Kiwis, Strawberries, Watermelon, Asparagus, Mango, Onions, Bell_Pepper, Potatoes, Spinach}
 function ViewCartCard() {
+
     function returnToMainPage() {
         navigate("/")
     }
+
+    // let cardsToDisplay = [];
+
     let navigate = useNavigate();
     return (
         <div className="card">
