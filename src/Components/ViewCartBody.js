@@ -3,6 +3,19 @@ import Card from "../Components/Card";
 import ViewCartCard from "./ViewCartCard";
 
 function ViewCartBody() {
+
+    let keys = Object.keys(sessionStorage);
+    console.log(keys);
+
+    let cardsToDisplayQuantity = [];
+    let cardsToDisplayImages = [];
+
+    for (let i = 0; i < keys.length; i++) {
+        cardsToDisplayQuantity.push(sessionStorage.getItem(keys[i]))
+        cardsToDisplayImages.push(keys[i]);
+    }
+
+
     return (
         <div className="view-cart-body">
             <div className="view-cart-body-header">

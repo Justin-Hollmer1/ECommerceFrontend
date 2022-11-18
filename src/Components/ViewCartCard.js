@@ -23,8 +23,6 @@ function ViewCartCard() {
         navigate("/")
     }
 
-    // let cardsToDisplay = [];
-
     let navigate = useNavigate();
     return (
         <div className="card">

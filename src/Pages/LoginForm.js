@@ -111,8 +111,8 @@ function LoginForm() {
         if (!Object.keys(formErrors).length && hitSubmit) {
             console.log("Submit now");
             console.log(userObject)
-            sessionStorage.setItem("username", userObject.username);
-            sessionStorage.setItem("userID", userObject.id);
+            localStorage.setItem("username", userObject.username);
+            localStorage.setItem("userID", userObject.id);
             navigate("/");
         }
         else {

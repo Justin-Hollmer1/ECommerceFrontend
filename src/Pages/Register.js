@@ -92,8 +92,8 @@ function RegisterForm() {
                     },
                     body: JSON.stringify(userObject)
                 }).then(resp => resp.json()).then(data => {
-                    sessionStorage.setItem("username", data.username)
-                    sessionStorage.setItem("userID", data.id)
+                    localStorage.setItem("username", data.username)
+                    localStorage.setItem("userID", data.id)
                 });
             }
 
