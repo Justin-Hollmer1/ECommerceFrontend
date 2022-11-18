@@ -289,3 +289,26 @@ body {
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
+.remove-from-cart-buttons {
+    margin: 0;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.remove-from-cart-buttons > p {
+    margin: 0;
+    font-size: 12px;
+    text-align: center;
+}
+.remove-button {
+    margin: 0;
+}
+.back-to-main-page {
+    position: fixed;
+    top: 25px;
+    left: 20px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #c4f5e7;
+}
