@@ -36,7 +36,7 @@ function Card({name, cost, imagePath}) {
         else {
             console.log("Added " + itemQuantity + " " + name + "'s to cart.")
             if (!sessionStorage.getItem("cart-item-" + name)) {
-                sessionStorage.setItem("cart-item-" + name, "quantity-" + itemQuantity);
+                sessionStorage.setItem("cart-item-" + name, itemQuantity);
                 setInCartValue(true);
             }
         }

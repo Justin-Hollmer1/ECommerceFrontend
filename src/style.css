@@ -304,3 +304,11 @@ body {
 .remove-button {
     margin: 0;
 }
+.back-to-main-page {
+    position: fixed;
+    top: 25px;
+    left: 20px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #c4f5e7;
+}
