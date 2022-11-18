@@ -20,6 +20,7 @@ function Card({name, cost, imagePath}) {
     let navigate = useNavigate();
 
     let [itemQuantity, setItemQuantity] = useState(1);
+    let [inCartValue, setInCartValue] = useState(false);
 
     function handleQuantityChange(event) {
         event.preventDefault();
@@ -27,25 +28,36 @@ function Card({name, cost, imagePath}) {
         // console.log("The quantity of " + name + " is " + itemQuantity);
     }
 
-    function handleSubmit(event) {
+    function addToCart(event) {
         event.preventDefault()
         if (sessionStorage.getItem("username") === null) {
             navigate("/login")
         }
         else {
             console.log("Added " + itemQuantity + " " + name + "'s to cart.")
+            if (!sessionStorage.getItem("cart-item-" + name)) {
+                sessionStorage.setItem("cart-item-" + name, "quantity-" + itemQuantity);
+                setInCartValue(true);
+            }
         }
+    }
+
+    function removeFromCart(event) {
+        event.preventDefault();
+        sessionStorage.removeItem("cart-item-" + name);
+        setInCartValue(false);
+        console.log("Removed " + name + " from cart.");
     }
 
     return (
         <div>
-            <form className="card" onSubmit={handleSubmit}>
+            <div className="card">
                 <img className="card-image" src={images[imagePath]}  alt="Image"/>
                 <div className="card-text">
                     <span className="card-name">{name}</span>
                     <span className="card-cost">${cost}</span>
                 </div>
-                <div className="card-button-holder">
+                {!sessionStorage.getItem("cart-item-" + name) && <form className="card-button-holder" onSubmit={addToCart}>
                     <button className="card-button" type="submit">Add to cart</button>
                     <input
                         className="card-quantity"
@@ -57,8 +69,22 @@ function Card({name, cost, imagePath}) {
                         value={itemQuantity}
                         onChange={handleQuantityChange}
                     />
-                </div>
-            </form>
+                </form>}
+                {sessionStorage.getItem("cart-item-" + name) && <div className="card-button-holder">
+                    <button className="card-button" type="submit" onClick={removeFromCart}>Remove From Cart</button>
+                    {/*<input*/}
+                    {/*    className="card-quantity"*/}
+                    {/*    type="number"*/}
+                    {/*    id="quantity"*/}
+                    {/*    name="quantity"*/}
+                    {/*    min="1"*/}
+                    {/*    max="99"*/}
+                    {/*    value={itemQuantity}*/}
+                    {/*    onChange={handleQuantityChange}*/}
+                    {/*/>*/}
+                </div>}
+
+            </div>
         </div>
     )
 }

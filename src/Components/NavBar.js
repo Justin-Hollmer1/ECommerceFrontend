@@ -17,7 +17,7 @@ function NavBar() {
                 {!sessionStorage.getItem("username") && <a href="/login"><span>Login / Register<FontAwesomeIcon icon={faUser}/></span></a>}
                 {sessionStorage.getItem("username") && <a href="/viewcart"><span>Cart <FontAwesomeIcon icon={faCartShopping}/></span></a>}
                 {sessionStorage.getItem("username") && <button onClick={() => {
-                    sessionStorage.removeItem("username")
+                    sessionStorage.clear();
                     window.location.reload();
                 }}><span>Logout</span></button>}
             </div>
