@@ -33,6 +33,12 @@ function MainPage() {
             return <Card name={n.name} cost={n.cost} imagePath={n.image_url} key={n.id} />
         }))
     }, [allItems])
+
+    // let array = ["item1", "item2", "item3"]
+    // sessionStorage.setItem("itemList", JSON.stringify(array))
+    // console.log(sessionStorage.getItem("itemList"));
+    // console.log(JSON.parse(sessionStorage.getItem("itemList"))[0])
+
     return (
         <div>
             <NavBar />

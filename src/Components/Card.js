@@ -28,7 +28,7 @@ function Card({name, cost, imagePath}) {
     useEffect(() => {
         if (sessionStorage.getItem(name) !== null) {
             setInCartValue(true);
-            setItemQuantity(sessionStorage.getItem(name));
+            setItemQuantity(JSON.parse(sessionStorage.getItem(name))[0]);
         }
         console.log("This function should run once per page load");
     }, [])
@@ -50,7 +50,7 @@ function Card({name, cost, imagePath}) {
         else {
             console.log("Added " + itemQuantity + " " + name + "'s to cart.")
             if (!sessionStorage.getItem(name)) {
-                sessionStorage.setItem(name, itemQuantity);
+                sessionStorage.setItem(name, JSON.stringify([itemQuantity, cost]))
                 setInCartValue(true);
             }
         }

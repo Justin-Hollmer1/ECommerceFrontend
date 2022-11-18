@@ -17,22 +17,32 @@ import { useNavigate } from "react-router-dom";
 
 
 const images = {Bananas, Apples, Chicken_breast, Avocados, Carrots, Kiwis, Strawberries, Watermelon, Asparagus, Mango, Onions, Bell_Pepper, Potatoes, Spinach}
-function ViewCartCard() {
+function ViewCartCard({name, cost, quantity}) {
 
-    function returnToMainPage() {
-        navigate("/")
-    }
 
     let navigate = useNavigate();
     return (
-        <div className="card">
-            <button className="back-to-main-page" onClick={returnToMainPage}>Back To Main Page</button>
-            <img className="card-image" src={Bananas}/>
-            <div className="card-text">
-                <span className="card-name">Name here</span>
-                <span className="card-cost">Cost here</span>
+        <div className="view-cart-body-row">
+            <div className="card">
+                <img className="card-image" src={images[name]}  alt="Image"/>
+                <div className="card-text">
+                    <span className="card-name">{name}</span>
+                    <span className="card-cost">${cost}</span>
+                </div>
+                <div className="remove-from-cart-buttons">
+                    <button className="remove-button" type="submit">Remove From Cart</button>
+                </div>
             </div>
-            <button className="remove-from-cart-button">Remove from cart</button>
+            <div className="view-cart-quantity">
+                <div className="view-cart-quantity-box">
+                    <span>{quantity}</span>
+                </div>
+            </div>
+            <div className="view-cart-price">
+                <div className="view-cart-price-box">
+                    <span>{cost}</span>
+                </div>
+            </div>
         </div>
     )
 }

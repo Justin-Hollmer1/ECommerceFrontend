@@ -1,43 +1,44 @@
 import React from 'react';
 import Card from "../Components/Card";
 import ViewCartCard from "./ViewCartCard";
+import {useNavigate} from "react-router-dom";
 
 function ViewCartBody() {
 
+    let itemsInCart = [];
+
+
     let keys = Object.keys(sessionStorage);
-    console.log(keys);
 
-    let cardsToDisplayQuantity = [];
-    let cardsToDisplayImages = [];
-
+    // This loops over all the session storage and assigns it to the itemsInCart array of objects.
     for (let i = 0; i < keys.length; i++) {
-        cardsToDisplayQuantity.push(sessionStorage.getItem(keys[i]))
-        cardsToDisplayImages.push(keys[i]);
+        itemsInCart.push({
+            name: keys[i],
+            quantity: JSON.parse(sessionStorage.getItem(keys[i]))[0],
+            cost: JSON.parse(sessionStorage.getItem(keys[i]))[1],
+        })
+    }
+
+    // This maps over all the itemInCart and creates one card for each.
+    let cards = itemsInCart.map(n => {
+        return <ViewCartCard name={n.name} quantity={n.quantity} cost={n.cost} key={n.name}/>
+    })
+
+    function returnToMainPage() {
+        navigate("/")
     }
 
 
+    let navigate = useNavigate();
     return (
         <div className="view-cart-body">
+            <button className="back-to-main-page" onClick={returnToMainPage}>Back To Main Page</button>
             <div className="view-cart-body-header">
                 <h4 className="view-cart-body-products-tag">Products</h4>
                 <h4 className="view-cart-body-quantity-tag">Quantity</h4>
                 <h4 className="view-cart-body-price-tag">Price</h4>
             </div>
-            <div className="view-cart-body-row">
-                <div className="view-cart-body-cards">
-                    <ViewCartCard />
-                </div>
-                <div className="view-cart-quantity">
-                    <div className="view-cart-quantity-box">
-                        <span>10</span>
-                    </div>
-                </div>
-                <div className="view-cart-price">
-                    <div className="view-cart-price-box">
-                        <span>10.00</span>
-                    </div>
-                </div>
-            </div>
+            {cards}
         </div>
     )
 }
