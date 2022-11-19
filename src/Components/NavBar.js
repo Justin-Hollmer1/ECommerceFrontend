@@ -15,7 +15,7 @@ function NavBar() {
             {/*Nav Right*/}
             <div className="nav-right">
                 {!localStorage.getItem("username") && <a href="/login"><span>Login / Register<FontAwesomeIcon icon={faUser}/></span></a>}
-                {localStorage.getItem("username") && <a href="/viewcart"><span>Cart <FontAwesomeIcon icon={faCartShopping}/></span></a>}
+                {localStorage.getItem("username") && <a href="/viewcart"><span>Cart / Checkout <FontAwesomeIcon icon={faCartShopping}/></span></a>}
                 {localStorage.getItem("username") && <button onClick={() => {
                     sessionStorage.clear();
                     localStorage.clear();

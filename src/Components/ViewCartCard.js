@@ -23,13 +23,15 @@ function ViewCartCard({name, cost, quantity, image_path}) {
     // console.log("quantity: " + quantity)
     // console.log("image path: " + image_path)
     let [itemQuantity, setItemQuantity] = useState([]);
+    let [itemPrice, setItemPrice] = useState(0);
 
 
     // This happens once per card on page load.
     // This sets the quantity equal to what it is in session storage.
-    // And this sets the state of the item being in the cart to true.
+    // This also sets the initial value for the price of the item.
     useEffect(() => {
         setItemQuantity(quantity);
+        setItemPrice(cost * quantity);
     }, [])
 
     function removeFromCart(event) {
@@ -45,7 +47,9 @@ function ViewCartCard({name, cost, quantity, image_path}) {
 
     // When the value of the quantity changes in state, it gets updated to the session storage.
     useEffect(() => {
-        sessionStorage.setItem(name, JSON.stringify([itemQuantity, cost, image_path]))
+        sessionStorage.setItem(name, JSON.stringify([itemQuantity, cost, image_path]));
+        setItemPrice(itemQuantity * cost);
+        console.log("The state has been updated.");
     }, [itemQuantity])
 
 
@@ -75,7 +79,7 @@ function ViewCartCard({name, cost, quantity, image_path}) {
             </div>
             <div className="view-cart-price">
                 <div className="view-cart-price-box">
-                    <span>${(cost * quantity).toFixed(2)}</span>
+                    <span>${itemPrice.toFixed(2)}</span>
                 </div>
             </div>
         </div>
