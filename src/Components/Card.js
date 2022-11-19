@@ -50,7 +50,7 @@ function Card({name, cost, imagePath}) {
         else {
             console.log("Added " + itemQuantity + " " + name + "'s to cart.")
             if (!sessionStorage.getItem(name)) {
-                sessionStorage.setItem(name, JSON.stringify([itemQuantity, cost]))
+                sessionStorage.setItem(name, JSON.stringify([itemQuantity, cost, imagePath]))
                 setInCartValue(true);
             }
         }

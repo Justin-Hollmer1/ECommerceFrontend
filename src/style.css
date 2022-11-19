@@ -284,6 +284,9 @@ body {
     justify-content: space-between;
     border: 1px solid black;
 }
+.view-cart-quantity-box > input {
+    width: 100%;
+}
 
 
 

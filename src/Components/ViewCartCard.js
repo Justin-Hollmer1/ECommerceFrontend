@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Bananas from './Item_Images/Bananas.webp';
 import Apples from './Item_Images/Apples.jpeg';
 import Chicken_breast from './Item_Images/Chicken_breast.png'
@@ -17,30 +17,65 @@ import { useNavigate } from "react-router-dom";
 
 
 const images = {Bananas, Apples, Chicken_breast, Avocados, Carrots, Kiwis, Strawberries, Watermelon, Asparagus, Mango, Onions, Bell_Pepper, Potatoes, Spinach}
-function ViewCartCard({name, cost, quantity}) {
+function ViewCartCard({name, cost, quantity, image_path}) {
+    // console.log("name: " + name)
+    // console.log("cost: " + cost)
+    // console.log("quantity: " + quantity)
+    // console.log("image path: " + image_path)
+    let [itemQuantity, setItemQuantity] = useState([]);
+
+
+    // This happens once per card on page load.
+    // This sets the quantity equal to what it is in session storage.
+    // And this sets the state of the item being in the cart to true.
+    useEffect(() => {
+        setItemQuantity(quantity);
+    }, [])
+
+    function removeFromCart(event) {
+        // event.preventDefault();
+        sessionStorage.removeItem(name)
+        window.location.reload();
+    }
+    // When the quantity is changes, it changes the value in state
+    function changeQuantity(e) {
+        // e.preventDefault();
+        setItemQuantity(e.target.value);
+    }
+
+    // When the value of the quantity changes in state, it gets updated to the session storage.
+    useEffect(() => {
+        sessionStorage.setItem(name, JSON.stringify([itemQuantity, cost, image_path]))
+    }, [itemQuantity])
 
 
     let navigate = useNavigate();
     return (
         <div className="view-cart-body-row">
             <div className="card">
-                <img className="card-image" src={images[name]}  alt="Image"/>
+                <img className="card-image" src={images[image_path]} alt="Image" />
                 <div className="card-text">
                     <span className="card-name">{name}</span>
                     <span className="card-cost">${cost}</span>
                 </div>
                 <div className="remove-from-cart-buttons">
-                    <button className="remove-button" type="submit">Remove From Cart</button>
+                    <button className="remove-button" type="submit" onClick={removeFromCart}>Remove From Cart</button>
                 </div>
             </div>
             <div className="view-cart-quantity">
-                <div className="view-cart-quantity-box">
-                    <span>{quantity}</span>
-                </div>
+                <form className="view-cart-quantity-box">
+                    <input
+                        type="number"
+                        onChange={changeQuantity}
+                        value={itemQuantity}
+                        min="1"
+                        max="99"
+                    />
+                </form>
             </div>
             <div className="view-cart-price">
                 <div className="view-cart-price-box">
-                    <span>{cost}</span>
+                    <span>${(cost * quantity).toFixed(2)}</span>
                 </div>
             </div>
         </div>
