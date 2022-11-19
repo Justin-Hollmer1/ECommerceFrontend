@@ -7,18 +7,6 @@ function MainPage() {
     let [allItems, setAllItems] = useState([]);
     let [itemsToDisplay, setItemsToDisplay] = useState([])
 
-    // let allItems;
-    // let getAllItems = async () => {
-    //     await fetch("http://ec2-18-224-4-73.us-east-2.compute.amazonaws.com:8080/get-items")
-    //         .then(resp => resp.json())
-    //         .then(data => allItems = data);
-    //     console.log(allItems);
-    //     itemsToDisplay = allItems.map(n => {
-    //         return <Card name={n.name} cost={n.cost} imagePath={n.image_url} />
-    //     })
-    //     console.log(itemsToDisplay)
-    // }
-    // getAllItems()
     useEffect(() => {
         let getAllItems = async () => {
             await fetch(FetchURL + "/get-items")
@@ -30,9 +18,15 @@ function MainPage() {
 
     useEffect(() => {
         setItemsToDisplay(allItems.map(n => {
-            return <Card name={n.name} cost={n.cost} imagePath={n.image_url} key={n.id} />
+            return <Card name={n.name} cost={n.cost} imagePath={n.image_url} key={n.id} id={n.id} />
         }))
     }, [allItems])
+
+    // let array = ["item1", "item2", "item3"]
+    // sessionStorage.setItem("itemList", JSON.stringify(array))
+    // console.log(sessionStorage.getItem("itemList"));
+    // console.log(JSON.parse(sessionStorage.getItem("itemList"))[0])
+
     return (
         <div>
             <NavBar />

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Bananas from './Item_Images/Bananas.webp';
 import Apples from './Item_Images/Apples.jpeg';
 import Chicken_breast from './Item_Images/Chicken_breast.png'
@@ -16,35 +16,51 @@ import Spinach from './Item_Images/Spinach.jpeg'
 import {useNavigate} from "react-router-dom";
 
 const images = {Bananas, Apples, Chicken_breast, Avocados, Carrots, Kiwis, Strawberries, Watermelon, Asparagus, Mango, Onions, Bell_Pepper, Potatoes, Spinach}
-function Card({name, cost, imagePath}) {
+function Card({name, cost, imagePath, id}) {
     let navigate = useNavigate();
 
     let [itemQuantity, setItemQuantity] = useState(1);
     let [inCartValue, setInCartValue] = useState(false);
 
+    // This will run once on page load.
+    // This function references the session storage.
+    // This is to sync up state with the session storage.
+    useEffect(() => {
+        if (sessionStorage.getItem(name) !== null) {
+            setInCartValue(true);
+            setItemQuantity(JSON.parse(sessionStorage.getItem(name))[0]);
+        }
+        console.log("This function should run once per page load");
+    }, [])
+
+
+    // This is handles the state for the quantity of items.
     function handleQuantityChange(event) {
         event.preventDefault();
         setItemQuantity(event.target.value);
         // console.log("The quantity of " + name + " is " + itemQuantity);
     }
 
+    // This function adds an item to the cart.
     function addToCart(event) {
         event.preventDefault()
-        if (sessionStorage.getItem("username") === null) {
+        if (localStorage.getItem("username") === null) {
             navigate("/login")
         }
         else {
             console.log("Added " + itemQuantity + " " + name + "'s to cart.")
-            if (!sessionStorage.getItem("cart-item-" + name)) {
-                sessionStorage.setItem("cart-item-" + name, itemQuantity);
+            if (!sessionStorage.getItem(name)) {
+                sessionStorage.setItem(name, JSON.stringify([itemQuantity, cost, imagePath, id]))
                 setInCartValue(true);
             }
         }
     }
 
+
+    // This function removes an item from the cart.
     function removeFromCart(event) {
         event.preventDefault();
-        sessionStorage.removeItem("cart-item-" + name);
+        sessionStorage.removeItem(name);
         setInCartValue(false);
         console.log("Removed " + name + " from cart.");
     }
@@ -57,7 +73,7 @@ function Card({name, cost, imagePath}) {
                     <span className="card-name">{name}</span>
                     <span className="card-cost">${cost}</span>
                 </div>
-                {!sessionStorage.getItem("cart-item-" + name) && <form className="card-button-holder" onSubmit={addToCart}>
+                {!inCartValue && <form className="card-button-holder" onSubmit={addToCart}>
                     <button className="card-button" type="submit">Add to cart</button>
                     <input
                         className="card-quantity"
@@ -70,7 +86,7 @@ function Card({name, cost, imagePath}) {
                         onChange={handleQuantityChange}
                     />
                 </form>}
-                {sessionStorage.getItem("cart-item-" + name) && <div className="remove-from-cart-buttons">
+                {inCartValue && <div className="remove-from-cart-buttons">
                     <button className="remove-button" type="submit" onClick={removeFromCart}>Remove From Cart</button>
                     <p>{itemQuantity} "{name}" in cart now</p>
                 </div>}
