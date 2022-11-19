@@ -6,7 +6,7 @@ import {useNavigate} from "react-router-dom";
 function ViewCartBody() {
 
     let itemsInCart = [];
-
+    console.log("This component is being rendered.")
 
     let keys = Object.keys(sessionStorage);
 
@@ -40,6 +40,28 @@ function ViewCartBody() {
                 <h4 className="view-cart-body-price-tag">Price</h4>
             </div>
             {cards}
+            <form className="place-order-form">
+                <h1 className="place-order-form-header">Confirm Order</h1>
+                <div className="place-order-form-body">
+                    <div className="place-order-form-price">
+                        <span>Subtotal</span>
+                        <span>cost</span>
+                    </div>
+                    <div className="place-order-form-price">
+                        <span>Tax: (20%)</span>
+                        <span>cost</span>
+                    </div>
+                    <div className="place-order-form-price">
+                        <span>Total price:</span>
+                        <span>cost</span>
+                    </div>
+                    <div className="place-order-form-price">
+                        <span>Date of order:</span>
+                        <span>Date</span>
+                    </div>
+                </div>
+                <button className="place-order">Place order (submit the order to a database)</button>
+            </form>
         </div>
     )
 }
