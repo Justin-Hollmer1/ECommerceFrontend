@@ -2,12 +2,13 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons"
 import { faUser } from "@fortawesome/free-solid-svg-icons";
+import {useNavigate} from "react-router-dom";
 
 function NavBar() {
 
 
 
-
+    let navigate = useNavigate();
 
     return (
         <div className="navbar">
@@ -19,6 +20,7 @@ function NavBar() {
                 {localStorage.getItem("username") && <button onClick={() => {
                     sessionStorage.clear();
                     localStorage.clear();
+                    navigate("/")
                     window.location.reload();
                 }}><span>Logout</span></button>}
             </div>

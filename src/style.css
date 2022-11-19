@@ -363,9 +363,38 @@ body {
     background-color: #ff7b7b;
 }
 
+.proceed-to-checkout {
+    height: 3em;
+    border-radius: 10px;
+    margin: 10px 10px 50px 10px
+}
 
+.checkout-page {
+    background-color: #cbcbcb;
+    height: 100vh;
+    margin: 0;
+}
+.checkout-form {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 25em;
+    height: 35em;
+    border: 1px solid black;
+    margin-top: 5em;
+    background-color: #7fcdb8;
+    border-radius: 5px;
+}
 
+.checkout-form-details {
+    display: flex;
+    width: 45%;
+    justify-content: space-between;
+    font-size: 20px;
 
+}
 
 
 

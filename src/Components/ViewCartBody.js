@@ -29,6 +29,10 @@ function ViewCartBody() {
         navigate("/")
     }
 
+    function proceedToCheckout() {
+        navigate("/checkout")
+    }
+
 
     let navigate = useNavigate();
     return (
@@ -40,28 +44,7 @@ function ViewCartBody() {
                 <h4 className="view-cart-body-price-tag">Price</h4>
             </div>
             {cards}
-            <form className="place-order-form">
-                <h1 className="place-order-form-header">Confirm Order</h1>
-                <div className="place-order-form-body">
-                    <div className="place-order-form-price">
-                        <span>Subtotal</span>
-                        <span>cost</span>
-                    </div>
-                    <div className="place-order-form-price">
-                        <span>Tax: (20%)</span>
-                        <span>cost</span>
-                    </div>
-                    <div className="place-order-form-price">
-                        <span>Total price:</span>
-                        <span>cost</span>
-                    </div>
-                    <div className="place-order-form-price">
-                        <span>Date of order:</span>
-                        <span>Date</span>
-                    </div>
-                </div>
-                <button className="place-order">Place order (submit the order to a database)</button>
-            </form>
+            <button className="proceed-to-checkout" onClick={proceedToCheckout}>Proceed to checkout</button>
         </div>
     )
 }
