@@ -16,13 +16,14 @@ function ViewCartBody() {
             name: keys[i],
             quantity: JSON.parse(sessionStorage.getItem(keys[i]))[0],
             cost: JSON.parse(sessionStorage.getItem(keys[i]))[1],
-            image_path: JSON.parse(sessionStorage.getItem(keys[i]))[2]
+            image_path: JSON.parse(sessionStorage.getItem(keys[i]))[2],
+            id: JSON.parse(sessionStorage.getItem(keys[i]))[3]
         })
     }
 
     // This maps over all the itemInCart and creates one card for each.
     let cards = itemsInCart.map(n => {
-        return <ViewCartCard name={n.name} quantity={n.quantity} cost={n.cost} image_path={n.image_path} key={n.name}/>
+        return <ViewCartCard name={n.name} quantity={n.quantity} cost={n.cost} image_path={n.image_path} key={n.id} id={n.id}/>
     })
 
     function returnToMainPage() {

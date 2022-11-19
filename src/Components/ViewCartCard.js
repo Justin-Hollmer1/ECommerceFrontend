@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom";
 
 
 const images = {Bananas, Apples, Chicken_breast, Avocados, Carrots, Kiwis, Strawberries, Watermelon, Asparagus, Mango, Onions, Bell_Pepper, Potatoes, Spinach}
-function ViewCartCard({name, cost, quantity, image_path}) {
+function ViewCartCard({name, cost, quantity, image_path, id}) {
     // console.log("name: " + name)
     // console.log("cost: " + cost)
     // console.log("quantity: " + quantity)
@@ -47,7 +47,7 @@ function ViewCartCard({name, cost, quantity, image_path}) {
 
     // When the value of the quantity changes in state, it gets updated to the session storage.
     useEffect(() => {
-        sessionStorage.setItem(name, JSON.stringify([itemQuantity, cost, image_path]));
+        sessionStorage.setItem(name, JSON.stringify([itemQuantity, cost, image_path, id]));
         setItemPrice(itemQuantity * cost);
         console.log("The state has been updated.");
     }, [itemQuantity])

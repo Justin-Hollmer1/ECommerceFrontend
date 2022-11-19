@@ -18,7 +18,7 @@ function MainPage() {
 
     useEffect(() => {
         setItemsToDisplay(allItems.map(n => {
-            return <Card name={n.name} cost={n.cost} imagePath={n.image_url} key={n.id} />
+            return <Card name={n.name} cost={n.cost} imagePath={n.image_url} key={n.id} id={n.id} />
         }))
     }, [allItems])
 

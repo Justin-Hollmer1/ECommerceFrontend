@@ -16,7 +16,7 @@ import Spinach from './Item_Images/Spinach.jpeg'
 import {useNavigate} from "react-router-dom";
 
 const images = {Bananas, Apples, Chicken_breast, Avocados, Carrots, Kiwis, Strawberries, Watermelon, Asparagus, Mango, Onions, Bell_Pepper, Potatoes, Spinach}
-function Card({name, cost, imagePath}) {
+function Card({name, cost, imagePath, id}) {
     let navigate = useNavigate();
 
     let [itemQuantity, setItemQuantity] = useState(1);
@@ -50,7 +50,7 @@ function Card({name, cost, imagePath}) {
         else {
             console.log("Added " + itemQuantity + " " + name + "'s to cart.")
             if (!sessionStorage.getItem(name)) {
-                sessionStorage.setItem(name, JSON.stringify([itemQuantity, cost, imagePath]))
+                sessionStorage.setItem(name, JSON.stringify([itemQuantity, cost, imagePath, id]))
                 setInCartValue(true);
             }
         }
