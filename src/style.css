@@ -396,8 +396,17 @@ body {
 
 }
 
-
-
+.previous-order-card {
+    width: 200px;
+    height: 300px;
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 1em;
+    background-color: #a97266;
+    margin: 1em;
+}
 
 
 

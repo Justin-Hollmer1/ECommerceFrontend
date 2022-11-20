@@ -59,6 +59,7 @@ function Checkout() {
                 "image_url": itemImageURL,
             }
 
+            // This will loop over the quantity of the item, adding to the database the correct amount of items.
             for (let o = 0; o < itemQuantity; o++) {
                 await fetch(FetchURL + "/post-order/" + orderID + "/item/" + itemID, {
                     method: "POST",

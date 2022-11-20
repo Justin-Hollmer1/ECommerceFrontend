@@ -42,7 +42,7 @@ function LoginForm() {
 
     // This will run once on page load.
     useEffect( () => {
-        const doTheThing = async () => {
+        const getAllUsers = async () => {
             await fetch( FetchURL + "/users")
                 .then(resp => resp.json())
                 .then(data => setAllUsersData(data));
@@ -50,7 +50,7 @@ function LoginForm() {
             //     return n.username;
             // })
         }
-        doTheThing();
+        getAllUsers();
     }, []);
 
     // Here are listed all the error conditions.
@@ -110,9 +110,9 @@ function LoginForm() {
         console.log("submit status" + hitSubmit)
         if (!Object.keys(formErrors).length && hitSubmit) {
             console.log("Submit now");
-            console.log(userObject)
             localStorage.setItem("username", userObject.username);
             localStorage.setItem("userID", userObject.id);
+            localStorage.setItem("userOrders", JSON.stringify(userObject.orders))
             navigate("/");
         }
         else {
