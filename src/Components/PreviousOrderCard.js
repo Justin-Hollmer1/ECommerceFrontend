@@ -18,7 +18,7 @@ function PreviousOrderCard({orderNumber, orderCost, orderDate, itemCount, orderI
 
     return (
         <div className="previous-order-card">
-            <h3>Order: {orderNumber}</h3>
+            <h3>Order: {orderNumber + 1}</h3>
             <h4>Date placed: {orderDate}</h4>
             <h4>Price: {orderCost}</h4>
             <p>Number of items: {itemCount}</p>

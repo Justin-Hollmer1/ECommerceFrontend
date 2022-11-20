@@ -67,8 +67,16 @@ function Checkout() {
                 })
             }
         }
+        // Reassign that userOrders in local storage to include the order that was just added to the database.
+        await fetch(FetchURL + "/user-" + localStorage.getItem("userID"))
+            .then(resp => resp.json())
+            .then(data => localStorage.setItem("userOrders", JSON.stringify(data.orders)))
     }
-    // console.log(keys[0])
+    // fetch(FetchURL + "/user-" + localStorage.getItem("userID"))
+    //     .then(resp => resp.json())
+    //     .then(data => console.log(data.orders))
+    // console.log(localStorage.getItem("userID"))
+
     return (
         <div className="checkout-page">
             <NavBar />
