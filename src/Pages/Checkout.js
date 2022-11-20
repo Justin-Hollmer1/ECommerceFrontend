@@ -28,8 +28,9 @@ function Checkout() {
     let postToDatabase = async () => {
         let orderObject = {
             "date": dateString,
-            "cost": total
+            "cost": total.toFixed(2)
         }
+
         let orderID;
         // This request sets the order to the user in the database.
         await fetch(FetchURL + "/post-order-user-id/" + userID, {
@@ -44,17 +45,26 @@ function Checkout() {
 
         // Now a for loop to add each of the corresponding items.
         for (let i = 0; i < keys.length; i++) {
+            // These are the variables that correspond with the specific item.
+            let itemID = JSON.parse(sessionStorage.getItem(keys[i]))[3];
+            let itemName = keys[i];
+            let itemCost = JSON.parse(sessionStorage.getItem(keys[i]))[1];
+            let itemImageURL = JSON.parse(sessionStorage.getItem(keys[i]))[2];
+            let itemQuantity = JSON.parse(sessionStorage.getItem(keys[i]))[0];
+
             let itemObject = {
-                "id": JSON.parse(sessionStorage.getItem(keys[i]))[3],
-                "name": keys[i],
-                "cost": JSON.parse(sessionStorage.getItem(keys[i]))[1],
-                "image_url": JSON.parse(sessionStorage.getItem(keys[i]))[2],
+                "id": itemID,
+                "name": itemName,
+                "cost": itemCost,
+                "image_url": itemImageURL,
             }
-            let itemID = JSON.parse(sessionStorage.getItem(keys[i]))[3]
-            await fetch(FetchURL + "/post-order/" + orderID + "/item/" + itemID, {
-                method: "POST",
-                body: JSON.stringify(itemObject)
-            })
+
+            for (let o = 0; o < itemQuantity; o++) {
+                await fetch(FetchURL + "/post-order/" + orderID + "/item/" + itemID, {
+                    method: "POST",
+                    body: JSON.stringify(itemObject)
+                })
+            }
         }
     }
     // console.log(keys[0])
