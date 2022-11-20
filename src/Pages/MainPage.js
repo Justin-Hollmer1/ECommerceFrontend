@@ -6,7 +6,6 @@ import { FetchURL } from "../FetchLocation";
 function MainPage() {
     let [allItems, setAllItems] = useState([]);
     let [itemsToDisplay, setItemsToDisplay] = useState([])
-
     useEffect(() => {
         let getAllItems = async () => {
             await fetch(FetchURL + "/get-items")

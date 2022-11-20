@@ -408,7 +408,10 @@ body {
     margin: 1em;
 }
 
-
+.previous-order-card-full {
+    width: 50em;
+    background-color: #cbcbcb;
+}
 
 
 
