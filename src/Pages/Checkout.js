@@ -106,8 +106,8 @@ function Checkout() {
                         <span>Total: </span>
                         <span>${total.toFixed(2)}</span>
                     </div>
-                    <button onClick={postToDatabase}>Place Order (Post the order to the database)</button>
-                    <button onClick={backToMainPage}>Actually I'm good (back to main page)</button>
+                    <button className="place-order-button" onClick={postToDatabase}>Place Order (Post the order to the database)</button>
+                    <button className="nav-to-main" onClick={backToMainPage}>Actually I'm good (back to main page)</button>
                 </div>
             </div>}
         </div>
