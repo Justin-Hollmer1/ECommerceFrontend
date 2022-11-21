@@ -94,12 +94,13 @@ function RegisterForm() {
                 }).then(resp => resp.json()).then(data => {
                     localStorage.setItem("username", data.username)
                     localStorage.setItem("userID", data.id)
+                    localStorage.setItem("userOrders", JSON.stringify([]))
                 });
             }
 
             // Once some error handling is done it will post the user to the database and redirect to the login page.
             postUser();
-            navigate("/login");
+            navigate("/");
         }
         else {
             console.log("There are errors.")
