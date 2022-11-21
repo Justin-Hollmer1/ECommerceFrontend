@@ -409,13 +409,25 @@ body {
 }
 
 .previous-order-card-full {
-    width: 50em;
-    background-color: #cbcbcb;
+    width: 200px;
+    height: 500px;
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 1em;
+    background-color: #a97266;
+    margin: 1em;
 }
 
-
-
-
+.back-to-main {
+    position: fixed;
+    top: 25px;
+    right: 20px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #c4f5e7;
+}
 
 
 

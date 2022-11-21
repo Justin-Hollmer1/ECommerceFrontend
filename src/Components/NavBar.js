@@ -10,6 +10,7 @@ function NavBar() {
     // console.log(localStorage.getItem("userOrders"))
     return (
         <div className="navbar">
+            {!localStorage.getItem("username") && <h1>Welcome</h1>}
             <h1>{localStorage.getItem("username")}</h1>
             {/*Nav Right*/}
             <div className="nav-right">
