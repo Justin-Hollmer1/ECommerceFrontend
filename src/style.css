@@ -447,7 +447,14 @@ body {
     background-color: #5cc9f1;
 }
 
-
+.place-order-button {
+    height: 50px;
+    width: 200px;
+    border-radius: 20px;
+    background-color: rgba(140, 221, 255, 0.46);
+    margin-top: 225px;
+    margin-bottom: 50px;
+}
 
 
 
