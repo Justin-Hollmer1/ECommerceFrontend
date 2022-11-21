@@ -87,23 +87,29 @@ function Checkout() {
     return (
         <div className="checkout-page">
             <NavBar />
-            <div className="checkout-form">
-                <h1>This is the checkout page</h1>
-                <div className="checkout-form-details">
-                    <span>Subtotal</span>
-                    <span>${totalPrice.toFixed(2)}</span>
+            {!keys.length && <div>
+                <h1>Can't place an order without items.</h1>
+                <button onClick={backToMainPage}>Go back to main page</button>
+            </div>}
+            {keys.length !== 0 && <div>
+                <div className="checkout-form">
+                    <h1>This is the checkout page</h1>
+                    <div className="checkout-form-details">
+                        <span>Subtotal</span>
+                        <span>${totalPrice.toFixed(2)}</span>
+                    </div>
+                    <div className="checkout-form-details">
+                        <span>Tax (8.25%): </span>
+                        <span>${tax.toFixed(2)}</span>
+                    </div>
+                    <div className="checkout-form-details">
+                        <span>Total: </span>
+                        <span>${total.toFixed(2)}</span>
+                    </div>
+                    <button onClick={postToDatabase}>Place Order (Post the order to the database)</button>
+                    <button onClick={backToMainPage}>Actually I'm good (back to main page)</button>
                 </div>
-                <div className="checkout-form-details">
-                    <span>Tax (8.25%): </span>
-                    <span>${tax.toFixed(2)}</span>
-                </div>
-                <div className="checkout-form-details">
-                    <span>Total: </span>
-                    <span>${total.toFixed(2)}</span>
-                </div>
-                <button onClick={postToDatabase}>Place Order (Post the order to the database)</button>
-                <button onClick={backToMainPage}>Actually I'm good (back to main page)</button>
-            </div>
+            </div>}
         </div>
     )
 }
