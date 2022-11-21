@@ -7,10 +7,10 @@ import {useNavigate} from "react-router-dom";
 function NavBar() {
 
     let navigate = useNavigate();
-    console.log(localStorage.getItem("userOrders"))
+    // console.log(localStorage.getItem("userOrders"))
     return (
         <div className="navbar">
-            <h1>Title</h1>
+            <h1>{localStorage.getItem("username")}</h1>
             {/*Nav Right*/}
             <div className="nav-right">
                 {!localStorage.getItem("username") && <a href="/login"><span>Login / Register<FontAwesomeIcon icon={faUser}/></span></a>}

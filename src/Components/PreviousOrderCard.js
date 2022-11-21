@@ -24,10 +24,70 @@ function PreviousOrderCard({orderNumber, orderCost, orderDate, itemCount, orderI
         setViewFullCard(!viewFullCard);
     }
 
+
+    // This takes in all the items and formats them.
+    let returnStatement = "";
+    let itemAmount = JSON.parse(localStorage.getItem("userOrders"))[orderNumber].items.length
+    // Writing the for loop using hard coded values
+    let previousItemName = JSON.parse(localStorage.getItem("userOrders"))[orderNumber].items[0].name
+    let count = 0;
+    for (let i = 0; i < itemAmount; i++) {
+        if (previousItemName === JSON.parse(localStorage.getItem("userOrders"))[orderNumber].items[i].name) {
+            count += 1;
+        }
+        else {
+            returnStatement += "" + count + " " + previousItemName + ", "
+            previousItemName = JSON.parse(localStorage.getItem("userOrders"))[orderNumber].items[i].name
+            count = 1;
+        }
+    }
+    returnStatement += "" + count + " " + previousItemName + ""
+    console.log(returnStatement)
+
+
+
+    // if (orderNumber === 5) {
+    //     let returnStatement = "You ordered: ";
+    //     let itemAmount = JSON.parse(localStorage.getItem("userOrders"))[5].items.length
+    //     // Writing the for loop using hard coded values
+    //     let previousItemName = JSON.parse(localStorage.getItem("userOrders"))[5].items[0].name
+    //     let count = 0;
+    //     for (let i = 0; i < itemAmount; i++) {
+    //         if (previousItemName === JSON.parse(localStorage.getItem("userOrders"))[5].items[i].name) {
+    //             count += 1;
+    //         }
+    //         else {
+    //             returnStatement += count + " " + previousItemName + ", "
+    //             previousItemName = JSON.parse(localStorage.getItem("userOrders"))[5].items[i].name
+    //             count = 1;
+    //         }
+    //     }
+    //     returnStatement += count + " " + previousItemName;
+    //     console.log(returnStatement)
+    // }
+    //
+    //
+    //
+    //
+    // let itemAmount = JSON.parse(localStorage.getItem("userOrders"))[5].items.length
+    // // Writing the for loop using hard coded values
+    // for (let i = 0; i < itemAmount; i++) {
+    //
+    // }
+
+
+
     let fullOrderCard = (
         <div className="previous-order-card-full">
             <h1>Order Number: {orderNumber + 1}</h1>
-            <p></p>
+            <p>Date Placed: {JSON.parse(localStorage.getItem("userOrders"))[orderNumber].date}</p>
+            <p>Cost: {JSON.parse(localStorage.getItem("userOrders"))[orderNumber].cost}</p>
+            {/*<p>Items in order: {JSON.parse(localStorage.getItem("userOrders"))[orderNumber].items[0].id}</p>*/}
+            <div>
+                <p>Items in order: </p>
+                <div>{returnStatement}</div>
+
+            </div>
             <button onClick={viewThatOrder}>Compress view</button>
         </div>
     );

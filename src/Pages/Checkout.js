@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import NavBar from "../Components/NavBar";
 import {FetchURL} from "../FetchLocation";
+import {useNavigate} from "react-router-dom";
 
 function Checkout() {
 
@@ -71,12 +72,18 @@ function Checkout() {
         await fetch(FetchURL + "/user-" + localStorage.getItem("userID"))
             .then(resp => resp.json())
             .then(data => localStorage.setItem("userOrders", JSON.stringify(data.orders)))
+        sessionStorage.clear();
+        navigate("/");
     }
     // fetch(FetchURL + "/user-" + localStorage.getItem("userID"))
     //     .then(resp => resp.json())
     //     .then(data => console.log(data.orders))
     // console.log(localStorage.getItem("userID"))
 
+    let backToMainPage = () => {
+        navigate("/");
+    }
+    let navigate = useNavigate();
     return (
         <div className="checkout-page">
             <NavBar />
@@ -95,6 +102,7 @@ function Checkout() {
                     <span>${total.toFixed(2)}</span>
                 </div>
                 <button onClick={postToDatabase}>Place Order (Post the order to the database)</button>
+                <button onClick={backToMainPage}>Actually I'm good (back to main page)</button>
             </div>
         </div>
     )
