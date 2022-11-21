@@ -87,9 +87,9 @@ function Checkout() {
     return (
         <div className="checkout-page">
             <NavBar />
-            {!keys.length && <div>
+            {!keys.length && <div className="checkout-without-items">
                 <h1>Can't place an order without items.</h1>
-                <button onClick={backToMainPage}>Go back to main page</button>
+                <button className="nav-to-main" onClick={backToMainPage}>Go back to main page</button>
             </div>}
             {keys.length !== 0 && <div>
                 <div className="checkout-form">
